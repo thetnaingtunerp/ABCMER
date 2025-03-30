@@ -12,16 +12,7 @@ class generator(models.Model):
         return self.power_model
 
 
-class anchor_site(models.Model):
-    site_id = models.CharField(max_length=255, blank=True, null=True)
-    region = models.CharField(max_length=255, blank=True, null=True)
-    township = models.CharField(max_length=255, blank=True, null=True)
-    generator = models.ForeignKey(generator, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.site_id
 
 class team(models.Model):
     team_name = models.CharField(max_length=255)
@@ -40,7 +31,20 @@ class engineer_group(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.team_member
+        return self.team_name.team_name
+
+class anchor_site(models.Model):
+    site_id = models.CharField(max_length=255, blank=True, null=True)
+    region = models.CharField(max_length=255, blank=True, null=True)
+    township = models.CharField(max_length=255, blank=True, null=True)
+    generator = models.ForeignKey(generator, on_delete=models.CASCADE)
+    engineer = models.ForeignKey(team, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.site_id
+
 
 class report_data(models.Model):
     site = models.ForeignKey(anchor_site, on_delete=models.CASCADE)
