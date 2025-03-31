@@ -1,0 +1,67 @@
+<script>
+
+    $(document).ready(function () {
+
+        $("#dataentryArchorTbl").on('click', '.dataentrysavebtn', function () {
+            var currenttr = $(this).closest(".dataformModal");
+            var fuellter = currenttr.find("input[name='fuellter']").val();
+            var fuelcm = currenttr.find("input[name='fuelcm']").val();
+            var dgrh = currenttr.find("input[name='dgrh']").val();
+            var dgkwh = currenttr.find("input[name='dgkwh']").val();
+            var dgavgprday = currenttr.find("input[name='dgavgprday']").val();
+            var gridkwh = currenttr.find("input[name='gridkwh']").val();
+            var omlload = currenttr.find("input[name='omlload']").val();
+            var atomload = currenttr.find("input[name='atomload']").val();
+            var mptload = currenttr.find("input[name='mptload']").val();
+            var mytelload = currenttr.find("input[name='mytelload']").val();
+            var cabinetvol = currenttr.find("input[name='cabinetvol']").val();
+            var archorid = currenttr.find("input[name='archorid']").val();
+            var cmtbox = currenttr.find(".cmtbox").val();
+
+
+
+            $.ajax({
+                url: "{% url 'myapp:data_entry' %}",
+                method: "POST",
+                data: { 
+                    fuellter:fuellter,
+                    fuelcm:fuelcm,
+                    dgrh:dgrh,
+                    dgkwh:dgkwh,
+                    dgavgprday:dgavgprday,
+                    gridkwh:gridkwh,
+                    omlload:omlload,
+                    atomload:atomload,
+                    mptload:mptload,
+                    mytelload:mytelload,
+                    cabinetvol:cabinetvol,
+                    cmtbox:cmtbox,
+                    archorid:archorid,
+
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+                 },
+                success: function (data) {
+                    alert('Data Submitted');
+                    // window.setTimeout(function(){} ,100);
+                    location.reload(); 
+
+                },
+                error: function () {
+                    alert('error report to administrator');
+                },
+
+            });//end ajax
+
+        }); //end dataentry
+
+
+
+
+
+
+
+
+    }); //ready function
+
+
+</script>

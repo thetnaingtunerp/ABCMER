@@ -64,6 +64,7 @@ class report_data(models.Model):
     mytel_load = models.FloatField(default=0.00)
 
     cabinet_vol = models.FloatField(default=0.00)
+    remark = models.TextField(blank=True,null=True)
 
     date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)

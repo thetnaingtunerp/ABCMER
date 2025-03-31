@@ -61,3 +61,44 @@ class data_entry(View):
         archor = anchor_site.objects.filter(engineer=gp.team_name)
         context = {'archor':archor}
         return render(request, 'data_entry.html', context)
+    
+    def post(self, request):
+        archorid = int(self.request.POST['archorid'])
+        fuellter = float(self.request.POST['fuellter'])
+        fuelcm = float(self.request.POST['fuelcm'])
+        dgrh = float(self.request.POST['dgrh'])
+        dgkwh = float(self.request.POST['dgkwh'])
+        dgavgprday = float(self.request.POST['dgavgprday'])
+        gridkwh = float(self.request.POST['gridkwh'])
+        omlload = float(self.request.POST['omlload'])
+        atomload = float(self.request.POST['atomload'])
+        mptload = float(self.request.POST['mptload'])
+        mytelload = float(self.request.POST['mytelload'])
+        cabinetvol = float(self.request.POST['cabinetvol'])
+        cmtbox = self.request.POST['cmtbox']
+        sid = anchor_site.objects.get(id=archorid)
+        
+        report_data.objects.create(site=sid, 
+                                   engineer=request.user,
+                                   fuel_cm=fuelcm,
+                                   fuel_liter=fuellter,
+                                   dg_rh=dgrh,
+                                   dg_kwh=dgkwh,
+                                   dg_avg_rh_day=dgavgprday,
+                                   grid_kwh=gridkwh,
+                                   oml_load=omlload,
+                                   atom_load=atomload,
+                                   mpt_load=mptload,
+                                   mytel_load=mytelload,
+                                   cabinet_vol = cabinetvol,
+                                   remark = cmtbox
+                                   )
+
+        return JsonResponse({'status':'success'})
+    
+
+class mer_report(View):
+    def get(self, request):
+        datas = report_data.objects.all()
+        context = {}
+        return render(request, 'mer_report.html', context)

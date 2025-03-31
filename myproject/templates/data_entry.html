@@ -14,23 +14,116 @@
             <table class="table text-start align-middle table-bordered table-hover mb-0">
                 <thead>
                     <tr class="text-dark">
-                        
+
                         <th scope="col">Site</th>
                         <th scope="col">Engineer</th>
                         <th scope="col">Action</th>
-                        
+
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="dataentryArchorTbl">
                     {% for i in archor %}
                     <tr>
                         <td>{{i.site_id}}</td>
                         <td>{{i.engineer}}</td>
-                        
-                        <td><a class="btn btn-sm btn-primary" href="">Fuel</a></td>
+
+                        <td>
+                            <a class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#fuelFillForm-{{i.id}}">Fuel
+                                Filling</a>
+
+                            <!-- Modal -->
+                            <div class="modal fade dataformModal" id="fuelFillForm-{{i.id}}" tabindex="-1" aria-labelledby="fuelFillFormLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="fuelFillFormLabel">{{i.site_id}}</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-sm-12 col-xl-12">
+                                                <div class="bg-light rounded h-100 p-4">
+                                                    <div class="row">
+                                                        <input type="number" name="archorid" value="{{i.id}}" hidden>
+                                                        <div class="form-floating mb-3 col-6">
+                                                            <input type="number" name="fuellter" value="0" class="form-control"
+                                                                id="floatingInputlit" placeholder="">
+                                                            <label for="floatingInputlit">Fuel Liter</label>
+                                                        </div>
+                                                        <div class="form-floating mb-3 col-6">
+                                                            <input type="number" name="fuelcm" value="0" class="form-control"
+                                                                id="floatingInputcm" placeholder="">
+                                                            <label for="floatingInputcm">Fuel CM</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-floating mb-3">
+                                                        <input type="number" name="dgrh" value="0" class="form-control" placeholder="">
+                                                        <label>DG RH</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-3">
+                                                        <input type="number" name="dgkwh" value="0" class="form-control" placeholder="">
+                                                        <label>DG KWH</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-3">
+                                                        <input type="number" name="dgavgprday" value="0" class="form-control" placeholder="">
+                                                        <label>DG AVG / Day</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-3">
+                                                        <input type="number" name="gridkwh" value="0" class="form-control" placeholder="">
+                                                        <label>Grid KWH</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-3">
+                                                        <input type="number" name="omlload" value="0" class="form-control" placeholder="">
+                                                        <label>OML Load</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-3">
+                                                        <input type="number" name="atomload" value="0" class="form-control" placeholder="">
+                                                        <label>ATOM Load</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-3">
+                                                        <input type="number" name="mptload" value="0" class="form-control" placeholder="">
+                                                        <label>MPT Load</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-3">
+                                                        <input type="number" name="mytelload" value="0" class="form-control" placeholder="">
+                                                        <label>Mytel Load</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-3">
+                                                        <input type="number" name="cabinetvol" value="0" class="form-control" placeholder="">
+                                                        <label>Cabinet Vol</label>
+                                                    </div>
+                                                    
+                                                    <div class="form-floating">
+                                                        <textarea class="form-control cmtbox" name="cmts"
+                                                            placeholder="Leave a comment here" id="floatingTextarea"
+                                                            style="height: 150px;"></textarea>
+                                                        <label for="floatingTextarea">Comments</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary dataentrysavebtn">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
                     </tr>
                     {% endfor %}
-                    
+
                 </tbody>
             </table>
         </div>
